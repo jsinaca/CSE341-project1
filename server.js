@@ -7,7 +7,7 @@ const port = process.env.PORT || 8080;
 const host = process.env.HOST;
 
 
-app.use('/', require('./api/routers/NodeProjectRoute'));
+app.use('/', require('./api/routers'));
 
 mongodb.initDB((err, mongodb) => {
 	if (err) {
