@@ -1,0 +1,26 @@
+{
+  "name": "cse341",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "author": "Josue Sinaca",
+  "license": "ISC",
+  "description": "Node project",
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "lint": "^1.1.2",
+    "mogoose": "^0.0.1-security",
+    "mongodb": "^6.9.0",
+    "node-rest-client": "^3.1.1",
+    "path": "^0.12.7",
+    "url": "^0.11.4"
+  }
+}
