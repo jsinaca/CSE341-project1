@@ -5,6 +5,7 @@ const User = db.user;
 const basecontroller = {}
 
 basecontroller.getAll = async (req, res, next) => {
+	//#swagger.tags=['Users']
 	const result = await mongodb.getDB().db().collection('user').find();
 	result.toArray().then((list) => {
 		res.setHeader('Cotent-Type', 'application/json');
@@ -13,6 +14,7 @@ basecontroller.getAll = async (req, res, next) => {
 }
 
 basecontroller.getSingle = async (req, res, next) => {
+	//#swagger.tags=['Users']
 	const userId = new ObjectId(req.params.id);
 	const result = await mongodb.getDB().db().collection('user').find({_id: userId});
 	result.toArray().then((list) => {
@@ -22,6 +24,7 @@ basecontroller.getSingle = async (req, res, next) => {
 }
 
 basecontroller.createUser = async (req, res, next) => {
+	//#swagger.tags=['Users']
 	if (!req.body) {
 		res.status(400).send({message: 'Content can not be empty!'});
 		return;
@@ -56,6 +59,7 @@ basecontroller.createUser = async (req, res, next) => {
 };
 
 basecontroller.updateUser = async (req, res, next) => {
+	//#swagger.tags=['Users']
 	const userId = new ObjectId(req.params.id)
 	if (!req.body) {
 		return res.status(400).send({
@@ -80,6 +84,7 @@ basecontroller.updateUser = async (req, res, next) => {
 };
 
 basecontroller.deleteUser = async (req, res, next) => {
+	//#swagger.tags=['Users']
 	const userId = new ObjectId(req.params.id);
 	const response = await mongodb.getDB().db().collection('user').deleteOne({_id: userId});
 	if (response.deletedCount  > 0) {
