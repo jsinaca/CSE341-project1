@@ -7,7 +7,11 @@ const basecontroller = {}
 basecontroller.getAll = async (req, res, next) => {
 	//#swagger.tags=['Users']
 	const result = await mongodb.getDB().db().collection('user').find();
-	result.toArray().then((list) => {
+	result.toArray((err) => {
+		if (err) {
+			res.status(400).json({message: err})
+		}
+	}).then((list) => {
 		res.setHeader('Cotent-Type', 'application/json');
 		res.status(200).json(list);
 	})
@@ -15,9 +19,16 @@ basecontroller.getAll = async (req, res, next) => {
 
 basecontroller.getSingle = async (req, res, next) => {
 	//#swagger.tags=['Users']
+	if (!ObjectId.isValid(req.params.id)) {
+		res.status(400).json('Must use a valid contact id to find a contact.')
+	}
 	const userId = new ObjectId(req.params.id);
 	const result = await mongodb.getDB().db().collection('user').find({_id: userId});
-	result.toArray().then((list) => {
+	result.toArray((err, lists) => {
+		if (err) {
+			res.status(400).json({message: err})
+		}
+	}).then((list) => {
 		res.setHeader('Cotent-Type', 'application/json');
 		res.status(200).json(list[0]);
 	})
@@ -60,6 +71,9 @@ basecontroller.createUser = async (req, res, next) => {
 
 basecontroller.updateUser = async (req, res, next) => {
 	//#swagger.tags=['Users']
+	if (!ObjectId.isValid(req.params.id)) {
+		res.status(400).json('Must use a valid contact id to update a contact.')
+	}
 	const userId = new ObjectId(req.params.id)
 	if (!req.body) {
 		return res.status(400).send({
@@ -77,7 +91,7 @@ basecontroller.updateUser = async (req, res, next) => {
 
 	const response = await mongodb.getDB().db().collection('user').replaceOne({_id: userId}, update);
 	if (response.modifiedCount > 0) {
-		res.send ({message: 'User was updated succesfully'})
+		res.status(204).send ({message: 'User updated succesfully'})
 	} else {res.status(500).json(
 		response.error || 'Error updating User with id=' + userId)
 	}
@@ -85,10 +99,13 @@ basecontroller.updateUser = async (req, res, next) => {
 
 basecontroller.deleteUser = async (req, res, next) => {
 	//#swagger.tags=['Users']
+	if (!ObjectId.isValid(req.params.id)) {
+		res.status(400).json('Must use a valid contact id to delete a contact.')
+	}
 	const userId = new ObjectId(req.params.id);
 	const response = await mongodb.getDB().db().collection('user').deleteOne({_id: userId});
 	if (response.deletedCount  > 0) {
-		res.send({message: 'User was deleted syccessfully'})
+		res.status(204).send({message: 'User was deleted syccessfully'})
 	} else {
 		res.status(500).json(
 			response.error || `Cannot delete User with id=${userId}. Maybe User was not found!`

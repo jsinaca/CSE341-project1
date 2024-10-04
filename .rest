@@ -2,8 +2,7 @@
 
 # GET https://cse341-project1-rjtd.onrender.com/users/66ef9f0fc39badddf1fe1cde
 
-# GET http://localhost:8080/users/66f60d082fd5ff1f0a7261c4
-
+# GET http://localhost:8080/users/66f651e5c1d655b03f613e2d4
 #send request
 # GET http://localhost:8080/users
 
@@ -13,25 +12,25 @@
 # content-type: application/json
 
 # {
-# 	"email":"test4@test.com",
-# 	"lastName":"test4",
+# 	"email":"test6@test.com",
+# 	"lastName":"test6",
 # 	"firstName":"Juana",
-# 	"birthday":"1995-04-28T07:00:00.000Z",
-# 	"favoriteColor":"Pink"
+# 	"birthday":"1995-04-28",
+# 	"favoriteColor":"Grey"
 # }
 
 # update user 
 
-# PUT http://localhost:8080/users/66f60d842fd5ff1f0a7261c5 HTTP/1.1
-# content-type: application/json
+PUT http://localhost:8080/users/66f651e5c1d655b03f613e2dd HTTP/1.1
+content-type: application/json
 
-# {
-# 	"email":"test4@test.com",
-# 	"lastName":"test4",
-# 	"firstName":"Juana",
-# 	"birthday":"1995-04-28T07:00:00.000Z",
-# 	"favoriteColor":"Pink"
-# }
+{
+	"email":"test7@test.com",
+	"lastName":"test7",
+	"firstName":"Juana",
+	"birthday":"1995-04-28",
+	"favoriteColor":"Orange"
+}
 
 # delete 
 # DELETE http://localhost:8080/users/

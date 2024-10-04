@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { userValidationRules, validate, validateID } = require('../utilities/validator.js');
 
 const userController = require('../controllers/users');
 
@@ -8,9 +9,9 @@ router.get('/', userController.getAll);
 
 router.get('/:id', userController.getSingle);
 
-router.post('/', userController.createUser);
+router.post('/', userValidationRules(), validate, userController.createUser);
 
-router.put('/:id', userController.updateUser);
+router.put('/:id', userValidationRules(), validate, userController.updateUser);
 
 router.delete('/:id', userController.deleteUser);
 

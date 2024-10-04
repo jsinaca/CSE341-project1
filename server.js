@@ -3,12 +3,13 @@ const app = express();
 const env = require('dotenv').config();
 const mongodb = require('./api/db/connect');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 
 const port = process.env.PORT || 8080;
 const host = process.env.HOST;
 
-
+app.use(cors());
 app.use(bodyParser.json());
 app.use((req, res, next) => {
 	res.setHeader('Accesss-Control-Allow-Origin', '*');
